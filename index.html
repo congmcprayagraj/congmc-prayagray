@@ -379,5 +379,34 @@
   </footer>
 
   <script src="script.js"></script>
+<script>
+const facilityCards = document.querySelectorAll('.facility-trigger');
+
+const popup = document.getElementById('facilityPopup');
+const popupImage = document.getElementById('popupImage');
+const popupTitle = document.getElementById('popupTitle');
+const popupClose = document.getElementById('popupClose');
+
+facilityCards.forEach(card => {
+  card.addEventListener('click', () => {
+    popupImage.src = card.dataset.image;
+    popupTitle.textContent = card.dataset.title;
+    popup.classList.add('active');
+  });
+});
+
+popupClose.addEventListener('click', () => {
+  popup.classList.remove('active');
+  popupImage.src = '';
+});
+
+popup.addEventListener('click', (event) => {
+  if (event.target === popup) {
+    popup.classList.remove('active');
+    popupImage.src = '';
+  }
+});
+</script>
+
 </body>
 </html>
