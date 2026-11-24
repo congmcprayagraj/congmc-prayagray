@@ -28,3 +28,73 @@ document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () 
 }));
 showSlide(0);
 startAuto();
+/* IMAGE LIGHTBOX GALLERY */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const images = document.querySelectorAll(
+        ".real-gallery img, .gallery-card img"
+    );
+
+    if (!images.length) return;
+
+    const lightbox = document.createElement("div");
+
+    lightbox.className = "image-lightbox";
+
+    lightbox.innerHTML = `
+        <button class="lightbox-close">&times;</button>
+        <button class="lightbox-prev">&#10094;</button>
+        <img src="" alt="College Gallery Image">
+        <button class="lightbox-next">&#10095;</button>
+    `;
+
+    document.body.appendChild(lightbox);
+
+    const displayImage = lightbox.querySelector("img");
+    let currentIndex = 0;
+
+    function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
+        displayImage.src = images[currentIndex].src;
+        lightbox.classList.add("active");
+    }
+
+    images.forEach((img, index) => {
+        img.addEventListener("click", function () {
+            showImage(index);
+        });
+    });
+
+    lightbox.querySelector(".lightbox-close")
+        .onclick = () => lightbox.classList.remove("active");
+
+    lightbox.querySelector(".lightbox-next")
+        .onclick = () => showImage(currentIndex + 1);
+
+    lightbox.querySelector(".lightbox-prev")
+        .onclick = () => showImage(currentIndex - 1);
+
+    lightbox.addEventListener("click", function (e) {
+        if (e.target === lightbox) {
+            lightbox.classList.remove("active");
+        }
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (!lightbox.classList.contains("active")) return;
+
+        if (e.key === "Escape") {
+            lightbox.classList.remove("active");
+        }
+
+        if (e.key === "ArrowRight") {
+            showImage(currentIndex + 1);
+        }
+
+        if (e.key === "ArrowLeft") {
+            showImage(currentIndex - 1);
+        }
+    });
+
+});
