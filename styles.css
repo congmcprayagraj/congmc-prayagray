@@ -221,3 +221,78 @@
     }
 }
 }
+/* CLICKABLE FACILITY CARDS */
+
+.facility-trigger {
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.facility-trigger:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(18,48,90,.12);
+}
+
+.facility-trigger small {
+  display: block;
+  margin-top: 12px;
+  color: #174a91;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+/* FACILITY IMAGE POPUP */
+
+.facility-popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(8,18,38,.88);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.facility-popup.active {
+  display: flex;
+}
+
+.facility-popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  width: min(750px, 100%);
+  position: relative;
+  text-align: center;
+}
+
+.facility-popup-content h2 {
+  font-family: "Playfair Display", serif;
+  color: #172e52;
+  margin: 5px 0 18px;
+}
+
+.facility-popup-content img {
+  width: 100%;
+  max-height: 65vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.popup-close {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  border: none;
+  background: #123e83;
+  color: white;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 25px;
+  cursor: pointer;
+}
