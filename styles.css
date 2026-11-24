@@ -8,3 +8,151 @@
 .gallery-featured { grid-row: span 2; min-height: 460px; }
 .gallery-featured img { min-height: 460px; }
 @media (max-width: 760px) { .gallery-featured { grid-row: auto; min-height: 260px; } .gallery-featured img { min-height: 260px; } }
+/* =================================
+   PREMIUM COLOURFUL CONTAINERS
+   ================================= */
+
+/* B.Sc Nursing Programme */
+.course-card {
+    background: linear-gradient(135deg, #e8f3ff, #f4f8ff);
+    border-color: #cbdcf5;
+    transition: .3s ease;
+}
+
+.course-card:hover {
+    box-shadow: 0 12px 30px rgba(18,62,131,.12);
+    transform: translateY(-4px);
+}
+
+.course-mark {
+    color: #174a91;
+}
+
+/* Faculty Cards - Individual Colours */
+
+.faculty-grid .person:nth-child(1) {
+    background: #e3f2fd;
+    border-color: #c5def5;
+}
+
+.faculty-grid .person:nth-child(2) {
+    background: #f3e8ff;
+    border-color: #e3d0f7;
+}
+
+.faculty-grid .person:nth-child(3) {
+    background: #e4f5e9;
+    border-color: #c9e8d2;
+}
+
+.faculty-grid .person:nth-child(4) {
+    background: #fff0df;
+    border-color: #f5dcc0;
+}
+
+.faculty-grid .person:nth-child(5) {
+    background: #e0f7fa;
+    border-color: #c3e9ed;
+}
+
+.faculty-grid .person:nth-child(6) {
+    background: #fce4ec;
+    border-color: #f3cad8;
+}
+
+.faculty-grid .person:nth-child(7) {
+    background: #ede7f6;
+    border-color: #d9cbed;
+}
+
+.faculty-grid .person:nth-child(8) {
+    background: #fff8df;
+    border-color: #f1e6b9;
+}
+
+.faculty-grid .person:nth-child(9) {
+    background: #e0f2f1;
+    border-color: #c5e5e2;
+}
+
+/* Faculty Hover Effect */
+
+.faculty-grid .person {
+    transition: all .3s ease;
+}
+
+.faculty-grid .person:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 22px rgba(20,50,90,.10);
+}
+
+/* Admission Containers */
+
+.admission-grid .info-card:first-child {
+    background: linear-gradient(135deg, #e8f3ff, #f3f8ff);
+    border-color: #cbdcf5;
+}
+
+.admission-grid .info-card:last-child {
+    background: linear-gradient(135deg, #fff3df, #fffaf0);
+    border-color: #f0dfbd;
+}
+
+/* Vision and Mission Containers */
+
+.vision-grid .info-card:first-child {
+    background: #eaf4ff;
+    border-color: #d0e2f8;
+}
+
+.vision-grid .info-card:last-child {
+    background: #eaf7ef;
+    border-color: #d0e9d8;
+}
+
+/* Facilities Containers */
+
+.facility:nth-child(4n+1) {
+    background: #eaf4ff;
+}
+
+.facility:nth-child(4n+2) {
+    background: #f3eaff;
+}
+
+.facility:nth-child(4n+3) {
+    background: #e8f6ec;
+}
+
+.facility:nth-child(4n+4) {
+    background: #fff3e4;
+}
+
+.facility {
+    transition: all .3s ease;
+}
+
+.facility:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 22px rgba(20,50,90,.09);
+}
+
+/* About College Container */
+
+.about-card {
+    background: linear-gradient(135deg, #edf5ff, #ffffff);
+    border-color: #d5e4f5;
+}
+
+/* Smooth Card Transitions */
+
+.info-card,
+.course-card,
+.about-card {
+    transition: all .3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(20,50,90,.08);
+}
