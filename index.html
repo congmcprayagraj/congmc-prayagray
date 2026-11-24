@@ -509,5 +509,285 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // ADD YOUR ALBUMS AND PHOTOS HERE
+
+  const albums = [
+
+    {
+      name: "Independence Day",
+      folder: "gallery/independence-day/",
+      photos: [
+        "photo-01.webp",
+        "photo-02.webp",
+        "photo-03.webp"
+      ]
+    },
+
+    {
+      name: "Republic Day",
+      folder: "gallery/republic-day/",
+      photos: [
+        "photo-01.webp",
+        "photo-02.webp"
+      ]
+    },
+
+    {
+      name: "Annual Function",
+      folder: "gallery/annual-function/",
+      photos: [
+        "photo-01.webp",
+        "photo-02.webp"
+      ]
+    },
+
+    {
+      name: "Sports Events",
+      folder: "gallery/sports-events/",
+      photos: [
+        "photo-01.webp",
+        "photo-02.webp"
+      ]
+    },
+
+    {
+      name: "Freshers Party",
+      folder: "gallery/freshers-party/",
+      photos: [
+        "photo-01.webp",
+        "photo-02.webp"
+      ]
+    },
+
+    {
+      name: "Nursing Activities",
+      folder: "gallery/nursing-activities/",
+      photos: [
+        "photo-01.webp",
+        "photo-02.webp"
+      ]
+    },
+
+    {
+      name: "Special Events",
+      folder: "gallery/special-events/",
+      photos: [
+        "photo-01.webp",
+        "photo-02.webp"
+      ]
+    }
+
+  ];
+
+  const albumsContainer = document.getElementById("galleryAlbums");
+  const albumView = document.getElementById("galleryAlbumView");
+  const photosContainer = document.getElementById("galleryPhotos");
+  const albumTitle = document.getElementById("galleryAlbumTitle");
+  const backButton = document.getElementById("galleryBack");
+
+  const lightbox = document.getElementById("galleryLightbox");
+  const lightboxImage = document.getElementById("galleryLightboxImage");
+  const closeBtn = document.getElementById("galleryClose");
+  const prevBtn = document.getElementById("galleryPrev");
+  const nextBtn = document.getElementById("galleryNext");
+  const counter = document.getElementById("galleryCounter");
+
+  let currentPhotos = [];
+  let currentIndex = 0;
+  let touchStartX = 0;
+
+  // CREATE ALBUM FOLDERS
+
+  albums.forEach((album, albumIndex) => {
+
+    const card = document.createElement("div");
+    card.className = "gallery-album-card";
+
+    const cover = document.createElement("img");
+    cover.src = album.folder + album.photos[0];
+    cover.alt = album.name;
+
+    const info = document.createElement("div");
+    info.className = "gallery-album-info";
+
+    const heading = document.createElement("h3");
+    heading.textContent = album.name;
+
+    const count = document.createElement("p");
+    count.textContent = album.photos.length + " Photos";
+
+    info.appendChild(heading);
+    info.appendChild(count);
+
+    card.appendChild(cover);
+    card.appendChild(info);
+
+    card.addEventListener("click", function () {
+      openAlbum(albumIndex);
+    });
+
+    albumsContainer.appendChild(card);
+
+  });
+
+  // OPEN ALBUM
+
+  function openAlbum(index) {
+
+    const album = albums[index];
+
+    currentPhotos = album.photos.map(photo => album.folder + photo);
+
+    albumTitle.textContent = album.name;
+
+    photosContainer.innerHTML = "";
+
+    currentPhotos.forEach((photo, photoIndex) => {
+
+      const card = document.createElement("div");
+      card.className = "gallery-photo-card";
+
+      const img = document.createElement("img");
+      img.src = photo;
+      img.alt = album.name + " photograph " + (photoIndex + 1);
+
+      card.appendChild(img);
+
+      card.addEventListener("click", function () {
+        openPhoto(photoIndex);
+      });
+
+      photosContainer.appendChild(card);
+
+    });
+
+    albumsContainer.hidden = true;
+    albumView.hidden = false;
+
+  }
+
+  // BACK TO ALBUMS
+
+  backButton.addEventListener("click", function () {
+
+    albumView.hidden = true;
+    albumsContainer.hidden = false;
+
+    currentPhotos = [];
+
+  });
+
+  // OPEN FULL SIZE PHOTO
+
+  function openPhoto(index) {
+
+    currentIndex = index;
+
+    showPhoto();
+
+    lightbox.classList.add("active");
+    document.body.style.overflow = "hidden";
+
+  }
+
+  function showPhoto() {
+
+    lightboxImage.src = currentPhotos[currentIndex];
+
+    counter.textContent =
+      (currentIndex + 1) + " / " + currentPhotos.length;
+
+  }
+
+  // NEXT PHOTO
+
+  function nextPhoto() {
+
+    currentIndex = (currentIndex + 1) % currentPhotos.length;
+
+    showPhoto();
+
+  }
+
+  // PREVIOUS PHOTO
+
+  function previousPhoto() {
+
+    currentIndex =
+      (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
+
+    showPhoto();
+
+  }
+
+  // CLOSE POPUP
+
+  function closePhoto() {
+
+    lightbox.classList.remove("active");
+
+    lightboxImage.src = "";
+
+    document.body.style.overflow = "";
+
+  }
+
+  closeBtn.addEventListener("click", closePhoto);
+  nextBtn.addEventListener("click", nextPhoto);
+  prevBtn.addEventListener("click", previousPhoto);
+
+  lightbox.addEventListener("click", function (event) {
+
+    if (event.target === lightbox) {
+      closePhoto();
+    }
+
+  });
+
+  // KEYBOARD SUPPORT
+
+  document.addEventListener("keydown", function (event) {
+
+    if (!lightbox.classList.contains("active")) return;
+
+    if (event.key === "Escape") closePhoto();
+
+    if (event.key === "ArrowRight") nextPhoto();
+
+    if (event.key === "ArrowLeft") previousPhoto();
+
+  });
+
+  // MOBILE SWIPE SUPPORT
+
+  lightbox.addEventListener("touchstart", function (event) {
+
+    touchStartX = event.changedTouches[0].screenX;
+
+  }, { passive: true });
+
+  lightbox.addEventListener("touchend", function (event) {
+
+    const touchEndX = event.changedTouches[0].screenX;
+
+    const difference = touchEndX - touchStartX;
+
+    if (Math.abs(difference) > 50) {
+
+      if (difference < 0) {
+        nextPhoto();
+      } else {
+        previousPhoto();
+      }
+
+    }
+
+  }, { passive: true });
+
+});
+  </script>
 </body>
 </html>
