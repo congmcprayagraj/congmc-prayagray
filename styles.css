@@ -409,3 +409,106 @@
     right: 5px;
   }
 }
+/* EVENT WISE GALLERY */
+
+.gallery-albums {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.gallery-album-card {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #e0e6ef;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-album-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+.gallery-album-card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-album-info {
+  padding: 16px;
+}
+
+.gallery-album-info h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.gallery-album-info p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.gallery-back {
+  margin-bottom: 22px;
+}
+
+.gallery-album-view h2 {
+  margin-bottom: 22px;
+}
+
+.gallery-album-view[hidden] {
+  display: none;
+}
+
+.gallery-albums[hidden] {
+  display: none;
+}
+
+.gallery-photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.gallery-photo-card {
+  overflow: hidden;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.gallery-photo-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.gallery-photo-card:hover img {
+  transform: scale(1.04);
+}
+
+@media (max-width: 768px) {
+  .gallery-albums,
+  .gallery-photos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .gallery-album-card img,
+  .gallery-photo-card img {
+    height: 150px;
+  }
+}
+
+@media (max-width: 420px) {
+  .gallery-albums,
+  .gallery-photos {
+    grid-template-columns: 1fr 1fr;
+  }
+}
