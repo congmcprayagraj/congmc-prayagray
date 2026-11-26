@@ -155,7 +155,9 @@
 .info-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 25px rgba(20,50,90,.08);
-   /* IMAGE LIGHTBOX */
+}
+
+/* IMAGE LIGHTBOX */
 
 .gallery-card img {
     cursor: zoom-in;
@@ -219,7 +221,6 @@
         max-width: 100%;
         max-height: 75vh;
     }
-}
 }
 /* CLICKABLE FACILITY CARDS */
 
