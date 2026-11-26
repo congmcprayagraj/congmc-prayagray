@@ -513,7 +513,16 @@
     grid-template-columns: 1fr 1fr;
   }
 }
-/* MOBILE HERO IMAGE FITTING FIX */
+/* HERO SLIDER - RESPONSIVE IMAGE FIX */
+
+/* Desktop View */
+.hero-slider .slide {
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* Mobile View */
 @media (max-width: 560px) {
 
     .hero {
