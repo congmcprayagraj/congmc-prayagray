@@ -513,3 +513,18 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+/* MOBILE HERO IMAGE FITTING FIX */
+@media (max-width: 560px) {
+
+    .hero {
+        height: 610px;
+    }
+
+    .hero-slider .slide {
+        background-size: contain !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        background-color: #102f65;
+    }
+
+}
