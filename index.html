@@ -13,6 +13,15 @@
   <link rel="stylesheet" href="gallery.css">
   <link rel="stylesheet" href="content.css">
   <link rel="icon" type="image/png" href="college-logo.png">
+  <script>
+    /* Intro splash: once per browser session; skipped for reduced-motion users. Add ?intro=1 to the URL to replay. */
+    try {
+      var q = /[?&]intro(=|&|$)/.test(location.search);
+      if ((q || !sessionStorage.getItem('introSeen')) && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+        document.documentElement.className += ' intro-on';
+      }
+    } catch (e) {}
+  </script>
   <link rel="canonical" href="https://congmcprayagraj.is-local.org/">
   <meta name="theme-color" content="#123e83">
   <meta property="og:type" content="website">
@@ -27,6 +36,17 @@
   </script>
 </head>
 <body>
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-bg"></div>
+    <div class="intro-stage">
+      <div class="intro-logo"><span class="intro-ring"></span><img src="college-logo.png" alt="" width="96" height="96" decoding="async"></div>
+      <div class="intro-title"><span class="word"><span class="ch" style="--i:0">C</span><span class="ch" style="--i:1">O</span><span class="ch" style="--i:2">L</span><span class="ch" style="--i:3">L</span><span class="ch" style="--i:4">E</span><span class="ch" style="--i:5">G</span><span class="ch" style="--i:6">E</span></span> <span class="word"><span class="ch" style="--i:7">O</span><span class="ch" style="--i:8">F</span></span> <span class="word"><span class="ch" style="--i:9">N</span><span class="ch" style="--i:10">U</span><span class="ch" style="--i:11">R</span><span class="ch" style="--i:12">S</span><span class="ch" style="--i:13">I</span><span class="ch" style="--i:14">N</span><span class="ch" style="--i:15">G</span></span></div>
+      <div class="intro-sub">Government Medical College, Prayagraj</div>
+      <div class="intro-line"></div>
+      <div class="intro-motto">सेवा परमो: धर्म:</div>
+    </div>
+    <button class="intro-skip" id="introSkip" type="button">Skip ›</button>
+  </div>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="topbar">
     <div class="container topbar-inner">
@@ -360,6 +380,7 @@
         <div><div class="section-kicker">HAVE A QUESTION?</div><h2>Connect with the College of Nursing.</h2><p>For admissions, academic information or general enquiries, contact the college directly.</p></div>
         <div class="cta-actions"><a class="btn btn-light" href="mailto:congmcprayagraj@gmail.com">Email Us</a><a class="btn btn-whatsapp" href="https://wa.me/917897383084" target="_blank" rel="noopener">WhatsApp</a></div>
       </div>
+      <div class="cta-coin" aria-hidden="true"><div class="coin"><img class="coin-face" src="college-logo.png" alt="" loading="lazy" width="150" height="150"><img class="coin-face coin-back" src="college-logo.png" alt="" loading="lazy" width="150" height="150"></div></div>
     </section>
   </main>
 
@@ -384,9 +405,9 @@
   <script src="script.js"></script>
   <script src="enhance.js" defer></script>
   <script src="data/gallery-manifest.js" defer></script>
-  <script src="data/notices.js" defer></script>
+  <script src="data/notices-data.js" defer></script>
   <script src="notices.js" defer></script>
-  <script src="data/blog.js" defer></script>
+  <script src="data/blog-data.js" defer></script>
   <script src="blog.js" defer></script>
   <script src="gallery.js" defer></script>
 <script>
