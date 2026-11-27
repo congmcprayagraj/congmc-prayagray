@@ -159,4 +159,99 @@
   if (coin && !reduce && 'IntersectionObserver' in window) {
     new IntersectionObserver(function (en) { en.forEach(function (x) { coin.classList.toggle('is-live', x.isIntersecting); }); }).observe(coin);
   }
+
+  /* ---------- Mobile menu: 3D drawer built from the page's own nav links ---------- */
+  (function () {
+    var toggle = document.querySelector('.menu-toggle'), nav = document.querySelector('.nav');
+    if (!toggle || !nav) return;
+    var ICONS = {
+      Home: '<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',
+      About: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>',
+      Academics: '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/>',
+      Admissions: '<rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h4"/>',
+      Facilities: '<path d="M4 21V7l8-4 8 4v14"/><path d="M9 21v-6h6v6M8 10h.01M12 10h.01M16 10h.01"/>',
+      Notices: '<path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"/><path d="M10 21h4"/>',
+      Gallery: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5-5-8 8"/>',
+      Blog: '<path d="M5 4h12v16H7a2 2 0 01-2-2z"/><path d="M17 8h3v10a2 2 0 01-2 2M8 8h6M8 12h6M8 16h4"/>',
+      Contact: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>'
+    };
+    var DESC = { Home: 'Welcome to the college', About: 'Our college & vision', Academics: 'B.Sc. Nursing & faculty',
+      Admissions: 'CNET • eligibility • documents', Facilities: 'Explore our facilities', Notices: 'Latest announcements',
+      Gallery: 'Events & photo albums', Blog: 'News & articles', Contact: 'Reach the college' };
+    var ACT = {
+      call: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/>',
+      wa: '<path d="M4 20l1.4-4.2A8 8 0 1112 20a8 8 0 01-3.8-1z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/>',
+      mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>'
+    };
+    function svg(path) { return '<svg viewBox="0 0 24 24" aria-hidden="true">' + path + '</svg>'; }
+
+    var links = Array.prototype.slice.call(nav.querySelectorAll('a')).filter(function (a) { return !a.classList.contains('nav-enquiry'); });
+    var enquiry = document.querySelector('.nav-enquiry');
+    var logoSrc = (document.querySelector('.brand img') || {}).src || 'college-logo.png';
+
+    var rows = links.map(function (a, i) {
+      var label = a.textContent.trim();
+      return '<a class="mm-link" style="--i:' + i + '" href="' + a.getAttribute('href') + '" data-label="' + label + '">' +
+        '<span class="mm-ico">' + svg(ICONS[label] || ICONS.About) + '</span>' +
+        '<span class="mm-txt"><b>' + label + '</b><small>' + (DESC[label] || '') + '</small></span><span class="mm-chev" aria-hidden="true">›</span></a>';
+    }).join('');
+
+    var wrap = document.createElement('div');
+    wrap.innerHTML =
+      '<div class="mm-backdrop" id="mmBackdrop"></div>' +
+      '<aside class="mm" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">' +
+        '<div class="mm-coin" aria-hidden="true"><div class="coin"><img src="' + logoSrc + '" alt=""><img src="' + logoSrc + '" alt=""></div></div>' +
+        '<div class="mm-head"><span class="mm-logo"><img src="' + logoSrc + '" alt=""></span>' +
+          '<div class="mm-title"><strong>College of Nursing</strong><span>Government Medical College, Prayagraj</span></div>' +
+          '<button class="mm-close" type="button" aria-label="Close menu">&times;</button></div>' +
+        '<nav class="mm-links" aria-label="Mobile navigation">' + rows + '</nav>' +
+        '<div class="mm-actions">' +
+          '<a class="mm-act" href="tel:+917897383084">' + svg(ACT.call) + 'Call</a>' +
+          '<a class="mm-act wa" href="https://wa.me/917897383084" target="_blank" rel="noopener">' + svg(ACT.wa) + 'WhatsApp</a>' +
+          '<a class="mm-act" href="mailto:congmcprayagraj@gmail.com">' + svg(ACT.mail) + 'Email</a></div>' +
+        (enquiry ? '<a class="mm-enquiry" href="' + enquiry.getAttribute('href') + '">Send an Enquiry</a>' : '') +
+        '<div class="mm-foot"><em>सेवा परमो: धर्म:</em>North Malaka, Prayagraj, Uttar Pradesh 211001</div>' +
+      '</aside>';
+    while (wrap.firstChild) document.body.appendChild(wrap.firstChild);
+
+    var menu = document.getElementById('mobileMenu'), backdrop = document.getElementById('mmBackdrop');
+    var closeBtn = menu.querySelector('.mm-close'), open = false;
+    menu.inert = true;
+    toggle.innerHTML = '<span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>';
+    toggle.setAttribute('aria-controls', 'mobileMenu');
+
+    function syncCurrent() {
+      var any = false;
+      Array.prototype.forEach.call(menu.querySelectorAll('.mm-link'), function (m, i) {
+        var on = links[i].classList.contains('is-current') || links[i].getAttribute('aria-current') === 'page';
+        m.classList.toggle('is-current', on); if (on) any = true;
+      });
+      if (!any && !/(notices|blog|gallery)\.html$/.test(location.pathname)) {
+        var home = menu.querySelector('.mm-link[data-label="Home"]'); if (home) home.classList.add('is-current');
+      }
+    }
+    function setOpen(v, restoreFocus) {
+      if (v === open) return; open = v;
+      if (v) syncCurrent();
+      document.body.classList.toggle('menu-open', v);
+      menu.setAttribute('aria-hidden', String(!v)); menu.inert = !v;
+      toggle.setAttribute('aria-expanded', String(v)); toggle.setAttribute('aria-label', v ? 'Close menu' : 'Open menu');
+      nav.classList.remove('open');                           // keep script.js's old state in sync
+      if (v) closeBtn.focus({ preventScroll: true }); else if (restoreFocus) toggle.focus({ preventScroll: true });
+    }
+    toggle.addEventListener('click', function () { setOpen(!open, false); });
+    closeBtn.addEventListener('click', function () { setOpen(false, true); });
+    backdrop.addEventListener('click', function () { setOpen(false, true); });
+    menu.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) setOpen(false, false); });
+    document.addEventListener('keydown', function (e) {
+      if (!open) return;
+      if (e.key === 'Escape') { setOpen(false, true); return; }
+      if (e.key === 'Tab') {
+        var f = Array.prototype.slice.call(menu.querySelectorAll('a,button'));
+        var pos = f.indexOf(document.activeElement); e.preventDefault();
+        f[(pos + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus({ preventScroll: true });
+      }
+    });
+    if (window.matchMedia) matchMedia('(min-width: 821px)').addEventListener('change', function (m) { if (m.matches) setOpen(false, false); });
+  })();
 })();
