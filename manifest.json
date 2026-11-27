@@ -1,0 +1,24 @@
+{
+  "id": "/",
+  "name": "College of Nursing, Government Medical College Prayagraj",
+  "short_name": "CON GMC Prayagraj",
+  "description": "B.Sc. Nursing academics, admissions, notices, gallery and updates from the College of Nursing, Government Medical College, Prayagraj.",
+  "start_url": "./index.html?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#123e83",
+  "theme_color": "#123e83",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["education", "medical"],
+  "icons": [
+    { "src": "college-logo.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "college-logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Notices", "short_name": "Notices", "url": "./notices.html", "icons": [{ "src": "college-logo.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Gallery", "short_name": "Gallery", "url": "./gallery.html", "icons": [{ "src": "college-logo.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Blog & Updates", "short_name": "Blog", "url": "./blog.html", "icons": [{ "src": "college-logo.png", "sizes": "192x192", "type": "image/png" }] }
+  ]
+}

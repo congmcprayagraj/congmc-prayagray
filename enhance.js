@@ -210,6 +210,7 @@
           '<a class="mm-act wa" href="https://wa.me/917897383084" target="_blank" rel="noopener">' + svg(ACT.wa) + 'WhatsApp</a>' +
           '<a class="mm-act" href="mailto:congmcprayagraj@gmail.com">' + svg(ACT.mail) + 'Email</a></div>' +
         (enquiry ? '<a class="mm-enquiry" href="' + enquiry.getAttribute('href') + '">Send an Enquiry</a>' : '') +
+        '<button class="mm-install" type="button" hidden>' + svg('<path d="M12 3v12M7 11l5 5 5-5M5 21h14"/>') + 'Install app on your phone</button>' +
         '<div class="mm-foot"><em>सेवा परमो: धर्म:</em>North Malaka, Prayagraj, Uttar Pradesh 211001</div>' +
       '</aside>';
     while (wrap.firstChild) document.body.appendChild(wrap.firstChild);
@@ -253,5 +254,63 @@
       }
     });
     if (window.matchMedia) matchMedia('(min-width: 821px)').addEventListener('change', function (m) { if (m.matches) setOpen(false, false); });
+  })();
+
+  /* ---------- Installable app (PWA): service worker + install prompt ---------- */
+  (function () {
+    var secure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    if ('serviceWorker' in navigator && secure) {
+      window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+    }
+    var standalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+    if (standalone) return;                                    // already running as an installed app
+
+    var KEY = 'conInstallDismissed', WEEK = 7 * 86400000;
+    function dismissedRecently() { try { var t = +localStorage.getItem(KEY); return t && Date.now() - t < WEEK; } catch (e) { return false; } }
+    function remember() { try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {} }
+    var logo = (document.querySelector('.brand img') || {}).src || 'college-logo.png';
+    var deferred = null, bar = null;
+
+    function hideBar() { if (!bar) return; bar.classList.remove('show'); document.body.classList.remove('has-install-bar');
+      var b = bar; bar = null; setTimeout(function () { b.remove(); }, 600); }
+    function showBar(ios) {
+      if (bar || dismissedRecently()) return;
+      bar = document.createElement('div'); bar.className = 'install-bar'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Install app');
+      bar.innerHTML = '<img src="' + logo + '" alt="" width="44" height="44">' +
+        '<div class="ib-txt"><b>Install College of Nursing app</b><span>' +
+        (ios ? 'Tap the Share button, then “Add to Home Screen”.' : 'Opens like an app, works offline too.') + '</span></div>' +
+        (ios ? '' : '<button class="ib-yes" type="button">Install</button>') +
+        '<button class="ib-no" type="button" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      document.body.classList.add('has-install-bar');
+      requestAnimationFrame(function () { requestAnimationFrame(function () { if (bar) bar.classList.add('show'); }); });
+      var yes = bar.querySelector('.ib-yes');
+      if (yes) yes.addEventListener('click', install);
+      bar.querySelector('.ib-no').addEventListener('click', function () { remember(); hideBar(); });
+    }
+    function install() {
+      if (!deferred) return;
+      deferred.prompt();
+      deferred.userChoice.then(function (c) { if (c.outcome !== 'accepted') remember(); deferred = null; hideBar(); setDrawerBtn(false); });
+    }
+    function setDrawerBtn(on) {
+      var b = document.querySelector('.mm-install'); if (b) b.hidden = !on;
+    }
+    function whenReady(fn) {                                    // wait until the intro splash has finished
+      if (!doc.classList.contains('intro-on')) return setTimeout(fn, 4000);
+      var t = setInterval(function () { if (!doc.classList.contains('intro-on')) { clearInterval(t); setTimeout(fn, 3000); } }, 500);
+    }
+
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault(); deferred = e;
+      setDrawerBtn(true);
+      var b = document.querySelector('.mm-install'); if (b && !b.__bound) { b.__bound = true; b.addEventListener('click', install); }
+      whenReady(function () { if (deferred) showBar(false); });
+    });
+    window.addEventListener('appinstalled', function () { deferred = null; remember(); hideBar(); setDrawerBtn(false); });
+
+    var ios = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+    var safari = /safari/i.test(navigator.userAgent) && !/crios|fxios|edgios/i.test(navigator.userAgent);
+    if (ios && safari) whenReady(function () { showBar(true); });
   })();
 })();
