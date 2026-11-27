@@ -106,4 +106,57 @@
     var img = document.getElementById('popupImage');
     if (p && p.classList.contains('active')) { p.classList.remove('active'); if (img) img.src = ''; }
   });
+
+  /* ---------- Intro splash controller ---------- */
+  (function () {
+    var intro = document.getElementById('intro');
+    if (!intro) return;
+    if (!doc.classList.contains('intro-on')) { intro.remove(); return; }
+    var done = false;
+    function finish() {
+      if (done) return; done = true;
+      try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
+      doc.classList.add('intro-done');            // lets the hero text start
+      intro.classList.add('is-leaving');
+      setTimeout(function () { intro.remove(); doc.classList.remove('intro-on'); }, 1050);
+    }
+    // Count the show from when its first animation really starts (fonts/slow networks can delay first paint)
+    var logo = intro.querySelector('.intro-logo');
+    if (logo) logo.addEventListener('animationstart', function () { setTimeout(finish, 3400); }, { once: true });
+    setTimeout(finish, 7000);                    // fallback if animationstart never fires
+    intro.addEventListener('click', finish);
+    var skip = document.getElementById('introSkip');
+    if (skip) skip.addEventListener('click', function (e) { e.stopPropagation(); finish(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' || e.key === 'Enter') finish(); });
+  })();
+
+  /* ---------- Pointer-follow 3D tilt (mouse only) ---------- */
+  if (!reduce && window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var TILT = '.info-card,.person,.facility,.blog-card,.gal-card:not(.is-empty),.course-card,.about-card';
+    var cur = null, raf = 0, px = 0, py = 0;
+    function apply() {
+      raf = 0; if (!cur) return;
+      var r = cur.getBoundingClientRect();
+      var x = (px - r.left) / r.width - 0.5, y = (py - r.top) / r.height - 0.5;
+      cur.style.setProperty('--ry', (x * 9).toFixed(2) + 'deg');
+      cur.style.setProperty('--rx', (-y * 9).toFixed(2) + 'deg');
+    }
+    function leave(el) { if (!el) return; el.classList.add('tilt-leave'); el.classList.remove('tilt-on');
+      el.style.removeProperty('--rx'); el.style.removeProperty('--ry');
+      setTimeout(function () { el.classList.remove('tilt-leave'); }, 460); }
+    document.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      var t = e.target.closest ? e.target.closest(TILT) : null;
+      if (t !== cur) { leave(cur); cur = t; if (cur) cur.classList.add('tilt-on'); }
+      if (cur) { px = e.clientX; py = e.clientY; if (!raf) raf = requestAnimationFrame(apply); }
+    }, { passive: true });
+    document.addEventListener('pointerleave', function () { leave(cur); cur = null; }, true);
+    window.addEventListener('blur', function () { leave(cur); cur = null; });
+  }
+
+  /* ---------- Logo coin: only spins while visible ---------- */
+  var coin = document.querySelector('.cta-coin');
+  if (coin && !reduce && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (en) { en.forEach(function (x) { coin.classList.toggle('is-live', x.isIntersecting); }); }).observe(coin);
+  }
 })();
