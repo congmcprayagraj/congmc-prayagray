@@ -35,3 +35,11 @@ window.NOTICES = [
   { id: "abvmu-holidays", title: "Holiday schedule", category: "General Announcements",
     url: "https://abvmuup.edu.in/", note: "As notified by ABVMU" }
 ];
+
+/* =====================================================================
+   ANNOUNCEMENT BAR (website ke upar sliding patti)
+   Khali [] chhodein to bar me upar ke latest notices apne aap chalte hain.
+   Alag se likhna ho to aise add karein:
+     { text: "Admissions 2026 open", url: "notices.html", new: true },
+   ===================================================================== */
+window.ANNOUNCEMENTS = [];
