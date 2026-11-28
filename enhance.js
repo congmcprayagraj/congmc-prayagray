@@ -12,7 +12,7 @@
     '.section-heading', '.two-col > *', '.vision-grid > *', '.course-card', '.faculty-wrap > .section-kicker',
     '.faculty-wrap > h3', '.faculty-grid > *', '.principal-card > *', '.admission-grid > *',
     '.facility-grid > *', '.notice-board > *', '.gallery-albums', '.gallery-note',
-    '.cta-inner > *', '.footer-grid > *', '.quick-grid > *'
+    '.cta-inner > *', '.footer-grid > *', '.quick-grid > *', '.lead-card', '.nu-panel', '.sc-panel', '.ic-box'
   ];
   var targets = [];
   groups.forEach(function (sel) {
@@ -132,7 +132,7 @@
 
   /* ---------- Pointer-follow 3D tilt (mouse only) ---------- */
   if (!reduce && window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    var TILT = '.info-card,.person,.facility,.blog-card,.gal-card:not(.is-empty),.course-card,.about-card';
+    var TILT = '.info-card,.person,.facility,.blog-card,.gal-card:not(.is-empty),.course-card,.about-card,.lead-card,.ic-box';
     var cur = null, raf = 0, px = 0, py = 0;
     function apply() {
       raf = 0; if (!cur) return;

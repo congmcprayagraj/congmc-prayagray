@@ -64,6 +64,11 @@
       <a class="btn btn-primary nav-enquiry" href="mailto:congmcprayagraj@gmail.com?subject=Enquiry%20-%20College%20of%20Nursing%20GMC%20Prayagraj">Enquiry</a>
     </div>
   </header>
+  <div class="ann-bar" id="annBar" role="region" aria-label="Announcements" hidden>
+    <span class="ann-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11v2a1 1 0 001 1h3l5 4V6L7 10H4a1 1 0 00-1 1zM16 8a5 5 0 010 8M19 5a9 9 0 010 14"/></svg><span>Announcements</span></span>
+    <div class="ann-track"><div class="ann-move" id="annMove"></div></div>
+    <button class="ann-btn" id="annPause" type="button" aria-label="Pause announcements" aria-pressed="false">&#10074;&#10074;</button>
+  </div>
 
   <main id="main">
     <section class="page-banner" id="blogBanner">
@@ -99,6 +104,8 @@
 
   <script src="script.js"></script>
   <script src="enhance.js" defer></script>
+  <script src="data/notices-data.js" defer></script>
+  <script src="notices.js" defer></script>
   <script src="data/blog-data.js" defer></script>
   <script src="blog.js" defer></script>
 </body>

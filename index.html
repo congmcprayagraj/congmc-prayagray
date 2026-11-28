@@ -89,6 +89,11 @@
       <a class="btn btn-primary nav-enquiry" href="mailto:congmcprayagraj@gmail.com?subject=Enquiry%20-%20College%20of%20Nursing%20GMC%20Prayagraj">Enquiry</a>
     </div>
   </header>
+  <div class="ann-bar" id="annBar" role="region" aria-label="Announcements" hidden>
+    <span class="ann-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11v2a1 1 0 001 1h3l5 4V6L7 10H4a1 1 0 00-1 1zM16 8a5 5 0 010 8M19 5a9 9 0 010 14"/></svg><span>Announcements</span></span>
+    <div class="ann-track"><div class="ann-move" id="annMove"></div></div>
+    <button class="ann-btn" id="annPause" type="button" aria-label="Pause announcements" aria-pressed="false">&#10074;&#10074;</button>
+  </div>
 
   <main id="main">
     <section class="hero" aria-label="College highlights">
@@ -187,12 +192,29 @@
           <div><div class="mini-label">UNDERGRADUATE PROGRAMME</div><h3>Bachelor of Science in Nursing</h3><p>A structured nursing programme combining theoretical learning, practical training and clinical exposure.</p></div>
           <a class="btn btn-outline" href="#admissions">Admission Details</a>
         </div>
-        <div class="faculty-wrap">
+        <div class="leadership" id="leadership">
+          <div class="section-kicker">COLLEGE LEADERSHIP</div>
+          <h3>Guiding the College of Nursing</h3>
+          <div class="lead-grid">
+            <article class="lead-card">
+              <div class="lead-photo"><img src="principal-photo.png" alt="Prof. (Dr.) Shyam Sundar Sharma, Principal" loading="lazy"></div>
+              <h4>Prof. (Dr.) Shyam Sundar Sharma</h4>
+              <span class="lead-role">Hon'ble Principal</span>
+              <p class="lead-org">College of Nursing, Government Medical College, Prayagraj</p>
+              <div class="lead-actions"><a class="lead-btn" href="#principal">Message</a></div>
+            </article>
+            <article class="lead-card">
+              <div class="lead-photo lead-initials" aria-hidden="true"><span>SR</span></div>
+              <h4>Prof. (Dr.) Shwetha Rani C.M.</h4>
+              <span class="lead-role">Hon'ble Vice-Principal</span>
+              <p class="lead-org">College of Nursing, Government Medical College, Prayagraj</p>
+            </article>
+          </div>
+        </div>
+        <div class="faculty-wrap" id="faculty">
           <div class="section-kicker">FACULTY & STAFF</div>
           <h3>Academic leadership & teaching team</h3>
           <div class="faculty-grid">
-            <div class="person"><b>Dr. Shyam Sunder Sharma</b><span>Principal</span></div>
-            <div class="person"><b>Dr. Shwetha Rani C.M.</b><span>Vice Principal</span></div>
             <div class="person"><b>Mr. Manish Goyal</b><span>Associate Professor</span></div>
             <div class="person"><b>Mr. Himanshu Soni</b><span>Associate Professor</span></div>
             <div class="person"><b>Mr. Mukut Bihari Sharma</b><span>Assistant Professor</span></div>
@@ -205,7 +227,7 @@
       </div>
     </section>
 
-    <section class="section principal-section">
+    <section class="section principal-section" id="principal">
       <div class="container principal-card">
         <div class="principal-photo">
           <img src="principal-photo.png" alt="Principal, College of Nursing GMC Prayagraj" loading="lazy" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
@@ -217,7 +239,7 @@
           <p>Dear Students, welcome to the College of Nursing. You are entering a profession that stands as the backbone of global healthcare—a discipline that requires an uncompromising commitment to excellence, accountability, and clinical precision.</p>
           <p>Nursing is not merely a career path; it is a profound responsibility. Your education here will test your resilience, sharpen your critical thinking, and demand professionalism. Approach every clinical rotation, examination and practical scenario with the seriousness it deserves.</p>
           <p>Our faculty is dedicated to providing the structured environment and evidence-based training necessary to succeed. In return, we expect dedication, punctuality and respect for the uniform you wear.</p>
-          <div class="signature"><b>Dr. Shyam Sundar Sharma</b><span>Principal, CONGMC Prayagraj</span></div>
+          <div class="signature"><b>Prof. (Dr.) Shyam Sundar Sharma</b><span>Principal, CONGMC Prayagraj</span></div>
         </div>
       </div>
     </section>
@@ -324,16 +346,62 @@
     <section class="section" id="notices">
       <div class="container">
         <div class="section-heading"><div><div class="section-kicker">NOTICE BOARD</div><h2>Important updates</h2></div><div class="section-links"><a class="text-link" href="notices.html">View all notices →</a> <span aria-hidden="true">&nbsp;·&nbsp;</span> <a class="text-link" href="https://abvmuup.edu.in/" target="_blank" rel="noopener">Official notifications ↗</a></div></div>
-        <div class="notice-board" id="noticeList" data-mode="home" data-limit="6">
-          <a href="https://abvmuup.edu.in/" target="_blank" rel="noopener"><span>ACADEMICS</span><b>Academic calendar as per ABVMU schedule</b><small>See official ABVMU updates</small>↗</a>
-          <a href="https://abvmuup.edu.in/examination_scheme_bscnursing.php" target="_blank" rel="noopener"><span>EXAMINATION</span><b>B.Sc. Nursing examination scheme</b><small>ABVMU official examination page</small>↗</a>
-          <a href="https://abvmuup.edu.in/exam-result.php" target="_blank" rel="noopener"><span>RESULTS</span><b>Examination results</b><small>View results on ABVMU</small>↗</a>
-          <a href="https://abvmuup.edu.in/" target="_blank" rel="noopener"><span>ADMISSION</span><b>CNET and counselling notices</b><small>Follow current ABVMU schedule</small>↗</a>
-          <a href="https://abvmuup.edu.in/" target="_blank" rel="noopener"><span>HOLIDAY</span><b>Holiday schedule</b><small>As notified by ABVMU</small>↗</a>
+        <div class="nu-grid">
+          <div class="nu-panel" id="newsPanel">
+            <div class="nu-head">
+              <span class="nu-title-bar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h12v16H7a2 2 0 01-2-2z"/><path d="M17 8h3v10a2 2 0 01-2 2M8 8h6M8 12h6M8 16h4"/></svg> News &amp; Updates</span>
+              <div class="nu-ctrl">
+                <button id="nuUp" type="button" aria-label="Previous news">&#9650;</button>
+                <button id="nuDown" type="button" aria-label="Next news">&#9660;</button>
+                <button id="nuPause" type="button" aria-label="Pause news ticker" aria-pressed="false">&#10074;&#10074;</button>
+              </div>
+            </div>
+            <div class="nu-view" id="noticeList" data-mode="ticker" aria-live="off">
+              <div class="nu-list">
+              <a class="nu-item" href="https://abvmuup.edu.in/" target="_blank" rel="noopener"><span class="nu-ico tint-2">A</span><span class="nu-txt"><span class="nu-top"><em class="nu-cat tint-2">Academic</em></span><strong class="nu-title">Academic calendar as per ABVMU schedule</strong><span class="nu-meta">See official ABVMU updates</span></span><span class="nu-arrow">›</span></a>
+              <a class="nu-item" href="https://abvmuup.edu.in/examination_scheme_bscnursing.php" target="_blank" rel="noopener"><span class="nu-ico tint-1">E</span><span class="nu-txt"><span class="nu-top"><em class="nu-cat tint-1">Examination</em></span><strong class="nu-title">B.Sc. Nursing examination scheme</strong><span class="nu-meta">ABVMU official examination page</span></span><span class="nu-arrow">›</span></a>
+              <a class="nu-item" href="https://abvmuup.edu.in/exam-result.php" target="_blank" rel="noopener"><span class="nu-ico tint-3">R</span><span class="nu-txt"><span class="nu-top"><em class="nu-cat tint-3">Results</em></span><strong class="nu-title">Examination results</strong><span class="nu-meta">View results on ABVMU</span></span><span class="nu-arrow">›</span></a>
+              <a class="nu-item" href="https://abvmuup.edu.in/" target="_blank" rel="noopener"><span class="nu-ico tint-0">A</span><span class="nu-txt"><span class="nu-top"><em class="nu-cat tint-0">Admission</em></span><strong class="nu-title">CNET and counselling notices</strong><span class="nu-meta">Follow current ABVMU schedule</span></span><span class="nu-arrow">›</span></a>
+              <a class="nu-item" href="https://abvmuup.edu.in/" target="_blank" rel="noopener"><span class="nu-ico tint-5">G</span><span class="nu-txt"><span class="nu-top"><em class="nu-cat tint-5">General Announcements</em></span><strong class="nu-title">Holiday schedule</strong><span class="nu-meta">As notified by ABVMU</span></span><span class="nu-arrow">›</span></a>
+              </div>
+            </div>
+            <a class="nu-foot" href="notices.html">View all news &amp; circulars →</a>
+          </div>
+          <aside class="sc-panel" aria-label="Student corner">
+            <div class="nu-head"><span class="nu-title-bar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg> Student Corner</span></div>
+            <div class="sc-list">
+            <a class="sc-item" href="https://abvmuup.edu.in/downloads/academiccal/Academic_Calendar_B.Sc._N_2026-27.pdf" target="_blank" rel="noopener"><span class="sc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><span class="sc-txt"><b>Academic Calendar</b><small>B.Sc. Nursing · 2026-27 (PDF)</small></span><span class="sc-arrow" aria-hidden="true">›</span></a>
+            <a class="sc-item" href="https://abvmuup.edu.in/examination_scheme_bscnursing.php" target="_blank" rel="noopener"><span class="sc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></span><span class="sc-txt"><b>Examination Scheme</b><small>B.Sc. Nursing · ABVMU</small></span><span class="sc-arrow" aria-hidden="true">›</span></a>
+            <a class="sc-item" href="https://abvmuup.edu.in/exam-result.php" target="_blank" rel="noopener"><span class="sc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></span><span class="sc-txt"><b>Examination Result</b><small>Check results on ABVMU</small></span><span class="sc-arrow" aria-hidden="true">›</span></a>
+            <a class="sc-item" href="https://www.abvmuup.edu.in/fee-notification.php" target="_blank" rel="noopener"><span class="sc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></span><span class="sc-txt"><b>Fee Notification</b><small>ABVMU fee notices</small></span><span class="sc-arrow" aria-hidden="true">›</span></a>
+            <a class="sc-item" href="https://scholarship.up.gov.in/" target="_blank" rel="noopener"><span class="sc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></span><span class="sc-txt"><b>Scholarship</b><small>UP Government scholarship portal</small></span><span class="sc-arrow" aria-hidden="true">›</span></a>
+            <a class="sc-item" href="https://abvmuup.edu.in/anti-ragging.php" target="_blank" rel="noopener"><span class="sc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="sc-txt"><b>Anti Ragging</b><small>Complaint process &amp; FAQs</small></span><span class="sc-arrow" aria-hidden="true">›</span></a>
+            <a class="sc-item" href="notices.html"><span class="sc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"/><path d="M10 21h4"/></svg></span><span class="sc-txt"><b>College Notices</b><small>All notices &amp; circulars</small></span><span class="sc-arrow" aria-hidden="true">›</span></a>
+            <a class="sc-item" href="#admissions"><span class="sc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h4"/></svg></span><span class="sc-txt"><b>Admissions</b><small>CNET · eligibility · documents</small></span><span class="sc-arrow" aria-hidden="true">›</span></a>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
-<section class="section gallery-section" id="gallery">
+
+    <section class="section section-soft" id="info-centre">
+      <div class="container">
+        <div class="section-heading"><div><div class="section-kicker">QUICK ACCESS</div><h2>Information Centre</h2></div></div>
+        <div class="ic-grid">
+          <a class="ic-box" href="https://abvmuup.edu.in/downloads/academiccal/Academic_Calendar_B.Sc._N_2026-27.pdf" target="_blank" rel="noopener"><span class="ic-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><span class="ic-label">Academic Calendar</span></a>
+          <a class="ic-box" href="https://abvmuup.edu.in/examination_scheme_bscnursing.php" target="_blank" rel="noopener"><span class="ic-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></span><span class="ic-label">Examination Scheme</span></a>
+          <a class="ic-box" href="https://abvmuup.edu.in/exam-result.php" target="_blank" rel="noopener"><span class="ic-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></span><span class="ic-label">Examination Result</span></a>
+          <a class="ic-box" href="https://abvmuup.edu.in/" target="_blank" rel="noopener"><span class="ic-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span class="ic-label">Holiday List</span></a>
+          <a class="ic-box" href="#faculty"><span class="ic-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3-6 7-6s7 2.5 7 6M17 5a3 3 0 010 6M22 20c0-2.5-1.5-4.5-4-5.5"/></svg></span><span class="ic-label">Faculty &amp; Staff</span></a>
+          <a class="ic-box" href="#principal"><span class="ic-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><span class="ic-label">Principal's Message</span></a>
+          <a class="ic-box" href="#facilities"><span class="ic-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V7l8-4 8 4v14"/><path d="M9 21v-6h6v6M8 10h.01M12 10h.01M16 10h.01"/></svg></span><span class="ic-label">Facilities</span></a>
+          <a class="ic-box" href="gallery.html"><span class="ic-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5-5-8 8"/></svg></span><span class="ic-label">Gallery</span></a>
+          <a class="ic-box" href="#contact"><span class="ic-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span class="ic-label">Contact Us</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gallery-section" id="gallery">
   <div class="container">
     <div class="section-heading">
       <div>

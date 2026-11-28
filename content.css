@@ -104,3 +104,117 @@
 .section-links{display:flex;align-items:center;flex-wrap:wrap;gap:4px;white-space:nowrap}
 @media(max-width:560px){.section-links{white-space:normal}}
 @media(max-width:560px){.section-links span{display:none}.section-links{gap:4px 16px}}
+
+/* =========================================================
+   ANNOUNCEMENT BAR — slides right to left
+   ========================================================= */
+.ann-bar{display:flex;align-items:stretch;position:relative;z-index:10;background:linear-gradient(90deg,#f7b02a,#f0892a);color:#2a1700;box-shadow:inset 0 -1px 0 rgba(0,0,0,.1)}
+.ann-bar[hidden]{display:none}
+.ann-label{flex:none;display:flex;align-items:center;gap:9px;padding:0 28px 0 16px;background:linear-gradient(100deg,#0c2e62,#123e83);color:#fff;
+  font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%);position:relative;z-index:2}
+.ann-label svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transform-origin:30% 70%;animation:annRing 3.2s ease-in-out infinite}
+@keyframes annRing{0%,60%,100%{transform:rotate(0)}66%{transform:rotate(-14deg)}72%{transform:rotate(12deg)}78%{transform:rotate(-8deg)}84%{transform:rotate(5deg)}}
+.ann-track{flex:1;min-width:0;overflow:hidden;position:relative;margin-left:-8px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent)}
+.ann-move{display:inline-flex;white-space:nowrap;padding:10px 0;will-change:transform}
+.ann-move.is-running{animation:annScroll var(--dur,40s) linear infinite}
+@keyframes annScroll{from{transform:translateX(0)}to{transform:translateX(calc(-1 * var(--shift,0px)))}}
+.ann-bar.is-paused .ann-move,.ann-track:focus-within .ann-move{animation-play-state:paused}
+@media(hover:hover){.ann-track:hover .ann-move{animation-play-state:paused}}
+.ann-grp{display:inline-flex;align-items:center}
+.ann-item{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#2a1700}
+.ann-item:hover{text-decoration:underline}
+.ann-dot{margin:0 18px;font-size:8px;opacity:.5}
+.ann-tag{font-size:9.5px;font-weight:800;letter-spacing:.05em;padding:2px 8px;border-radius:20px;color:#fff}
+.ann-new{background:#1b8c4b}.ann-imp{background:#b3261e}
+.ann-btn{flex:none;width:44px;border:0;background:rgba(0,0,0,.13);color:#2a1700;font-size:11px;cursor:pointer;transition:background-color .2s}
+.ann-btn:hover{background:rgba(0,0,0,.22)}
+.ann-btn[hidden]{display:none}
+.ann-bar.is-static .ann-track{overflow-x:auto;scrollbar-width:none}.ann-bar.is-static .ann-track::-webkit-scrollbar{display:none}
+@media(max-width:480px){.ann-label span{display:none}.ann-label{padding:0 24px 0 14px}}
+
+/* =========================================================
+   NEWS & UPDATES + STUDENT CORNER
+   ========================================================= */
+.nu-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:26px;align-items:start}
+.nu-panel,.sc-panel{background:#fff;border:1px solid #dce5f1;border-radius:14px;overflow:hidden;box-shadow:0 6px 22px rgba(18,48,90,.08)}
+.nu-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;background:linear-gradient(100deg,#123e83,#1b5bb0);color:#fff}
+.nu-title-bar{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.nu-title-bar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nu-ctrl{display:flex;gap:6px}
+.nu-ctrl button{width:28px;height:28px;border-radius:7px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;font-size:10px;cursor:pointer;transition:background-color .2s,transform .2s}
+.nu-ctrl button:hover{background:rgba(255,255,255,.28)}.nu-ctrl button:active{transform:scale(.9)}
+.nu-ctrl button[hidden]{display:none}
+.nu-view{position:relative;height:340px;overflow:hidden;background:#fff}
+.nu-view::before,.nu-view::after{content:"";position:absolute;left:0;right:0;height:22px;z-index:2;pointer-events:none}
+.nu-view::before{top:0;background:linear-gradient(#fff,rgba(255,255,255,0))}
+.nu-view::after{bottom:0;background:linear-gradient(rgba(255,255,255,0),#fff)}
+.nu-view.is-static{height:auto;max-height:420px;overflow-y:auto}
+.nu-view.is-static::before,.nu-view.is-static::after{display:none}
+.nu-list{will-change:transform}
+.nu-item{display:flex;gap:13px;align-items:flex-start;padding:15px 16px;border-bottom:1px solid #eaf0f7;color:inherit;transition:background-color .2s}
+a.nu-item:hover{background:#f3f8ff}
+.nu-ico{flex:none;width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:11px;font-weight:800;letter-spacing:.02em}
+.nu-txt{flex:1;min-width:0}
+.nu-top{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:5px}
+.nu-cat{font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border-radius:5px}
+.nu-top .nb-badge{margin-left:0}
+.nu-title{display:block;font-size:14px;line-height:1.45;color:#14213d;font-weight:600}
+.nu-meta{display:block;margin-top:3px;font-size:11.5px;color:#7a879b}
+.nu-arrow{flex:none;align-self:center;font-size:22px;color:#8aa6cf;transition:transform .25s}
+a.nu-item:hover .nu-arrow{transform:translateX(4px)}
+.nu-foot{display:block;padding:12px;text-align:center;font-size:13px;font-weight:700;color:#124a97;background:#f5f8fd;border-top:1px solid #e3eaf4;transition:background-color .2s}
+.nu-foot:hover{background:#e9f1fc}
+
+.sc-list{display:flex;flex-direction:column}
+.sc-item{display:flex;align-items:center;gap:13px;padding:11px 16px;border-bottom:1px solid #eef2f8;transition:background-color .2s,padding-left .25s var(--ease,ease)}
+.sc-item:last-child{border-bottom:0}
+.sc-item:hover{background:#f3f8ff;padding-left:21px}
+.sc-ico{flex:none;width:38px;height:38px;border-radius:10px;background:#e8f0fb;color:#174a91;display:grid;place-items:center;transition:transform .45s var(--ease,ease),background-color .25s,color .25s}
+.sc-ico svg,.ic-ico svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sc-item:hover .sc-ico{background:#123e83;color:#fff;transform:perspective(300px) rotateY(360deg)}
+.sc-txt{flex:1;min-width:0}.sc-txt b{display:block;font-size:14px;color:#14213d}.sc-txt small{display:block;font-size:11.5px;color:#7a879b;margin-top:1px}
+.sc-arrow{flex:none;color:#9db2d3;font-size:20px}
+
+/* =========================================================
+   INFORMATION CENTRE
+   ========================================================= */
+.ic-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.ic-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:30px 12px;background:#fff;border:1px solid #e0e6ef;border-radius:14px;text-align:center;
+  box-shadow:0 2px 8px rgba(18,48,90,.05);transition:transform .3s var(--ease,ease),box-shadow .3s,border-color .3s}
+.ic-ico{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#e8f0fb,#d4e3f8);color:#123e83;
+  transition:transform .6s var(--ease,ease),background .3s,color .3s}
+.ic-ico svg{width:25px;height:25px}
+.ic-label{font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#1e3355;line-height:1.35}
+@media(hover:hover){.ic-box:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(18,48,90,.14);border-color:#c5d3e8}
+  .ic-box:hover .ic-ico{background:linear-gradient(135deg,#123e83,#2a6bc4);color:#fff;transform:perspective(400px) rotateY(360deg)}}
+
+/* =========================================================
+   COLLEGE LEADERSHIP
+   ========================================================= */
+.leadership{margin:0 0 60px}
+.leadership h3{font-family:"Playfair Display",serif;font-size:28px;margin:8px 0 28px;color:#172e52}
+.lead-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:880px}
+.lead-card{position:relative;overflow:hidden;text-align:center;padding:32px 22px 28px;background:linear-gradient(170deg,#fff,#f4f8fe);border:1px solid #dbe5f3;border-radius:18px;
+  box-shadow:0 8px 26px rgba(18,48,90,.08);transition:transform .3s var(--ease,ease),box-shadow .3s}
+.lead-card::before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:linear-gradient(90deg,#123e83,#5fa0ee)}
+.lead-photo{width:136px;height:136px;margin:0 auto 18px;border-radius:50%;padding:4px;background:linear-gradient(135deg,#123e83,#5fa0ee);box-shadow:0 12px 28px rgba(18,62,131,.28)}
+.lead-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 20%;border-radius:50%;border:3px solid #fff;background:#fff}
+.lead-initials{display:grid;place-items:center;color:#fff;font:700 40px "Playfair Display",serif;letter-spacing:.04em}
+.lead-card h4{font-family:"Playfair Display",serif;font-size:22px;line-height:1.3;margin:0 0 12px;color:#172e52}
+.lead-role{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;padding:6px 16px;border-radius:999px;background:#eaf2fd;color:#174a91;border:1px solid #cfe0f7}
+.lead-org{margin:14px 0 0;font-size:12.5px;line-height:1.5;color:#6c788b}
+.lead-actions{margin-top:18px;display:flex;gap:10px;justify-content:center}
+.lead-btn{display:inline-block;padding:9px 24px;border-radius:999px;background:#123e83;color:#fff;font-size:12.5px;font-weight:700;transition:background-color .25s,transform .25s}
+.lead-btn:hover{background:#0c2e62;transform:translateY(-2px)}
+
+/* ---- responsive ---- */
+@media(max-width:900px){.nu-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.lead-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}.leadership h3{font-size:24px}}
+@media(max-width:560px){
+  .ic-grid{gap:9px}
+  .ic-box{padding:18px 6px;gap:10px;border-radius:12px}
+  .ic-ico{width:44px;height:44px;border-radius:13px}.ic-ico svg{width:21px;height:21px}
+  .ic-label{font-size:9.5px;letter-spacing:.03em}
+  .nu-view{height:310px}
+}
